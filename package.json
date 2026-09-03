@@ -1,0 +1,438 @@
+{
+  "name": "tfvc",
+  "displayName": "TFVC",
+  "description": "Team Foundation Version Control for Cursor and VS Code. Uses tf.exe or the TEE tf CLI in the Source Control view.",
+  "version": "0.1.0",
+  "publisher": "rexfordmachu",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#1b1f23",
+    "theme": "dark"
+  },
+  "homepage": "https://github.com/rexfordmachu/vscode-tfvc",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rexfordmachu/vscode-tfvc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rexfordmachu/vscode-tfvc/issues"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Other"
+  ],
+  "keywords": [
+    "tfvc",
+    "tfs",
+    "tf.exe",
+    "cursor",
+    "azure devops",
+    "team foundation",
+    "source control"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "tfvc.getLatest",
+        "title": "Get Latest",
+        "category": "TFVC",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "tfvc.getLatestFile",
+        "title": "Get Latest (Selected)",
+        "category": "TFVC",
+        "icon": "$(cloud-download)"
+      },
+      {
+        "command": "tfvc.checkout",
+        "title": "Check Out for Edit",
+        "category": "TFVC",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "tfvc.checkin",
+        "title": "Check In",
+        "category": "TFVC",
+        "icon": "$(check)"
+      },
+      {
+        "command": "tfvc.add",
+        "title": "Add",
+        "category": "TFVC",
+        "icon": "$(add)"
+      },
+      {
+        "command": "tfvc.undo",
+        "title": "Undo",
+        "category": "TFVC",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "tfvc.delete",
+        "title": "Delete",
+        "category": "TFVC",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "tfvc.rename",
+        "title": "Rename",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.refresh",
+        "title": "Refresh",
+        "category": "TFVC",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "tfvc.history",
+        "title": "View History",
+        "category": "TFVC",
+        "icon": "$(history)"
+      },
+      {
+        "command": "tfvc.diff",
+        "title": "Compare with Workspace Version",
+        "category": "TFVC",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "tfvc.openFile",
+        "title": "Open File",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.openDiff",
+        "title": "Open Changes",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.include",
+        "title": "Include",
+        "category": "TFVC",
+        "icon": "$(add)"
+      },
+      {
+        "command": "tfvc.exclude",
+        "title": "Exclude",
+        "category": "TFVC",
+        "icon": "$(remove)"
+      },
+      {
+        "command": "tfvc.includeAll",
+        "title": "Include All",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.excludeAll",
+        "title": "Exclude All",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.shelve",
+        "title": "Shelve",
+        "category": "TFVC",
+        "icon": "$(archive)"
+      },
+      {
+        "command": "tfvc.unshelve",
+        "title": "Unshelve",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.showOutput",
+        "title": "Show Output",
+        "category": "TFVC",
+        "icon": "$(output)"
+      },
+      {
+        "command": "tfvc.chooseTfPath",
+        "title": "Choose tf.exe Path",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.signIn",
+        "title": "Sign In",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.workspaceInfo",
+        "title": "Show Workspace Info",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.resolveKeepYours",
+        "title": "Resolve: Keep Yours",
+        "category": "TFVC"
+      },
+      {
+        "command": "tfvc.resolveTakeTheirs",
+        "title": "Resolve: Take Theirs",
+        "category": "TFVC"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "tfvc.openFile",
+          "when": "false"
+        },
+        {
+          "command": "tfvc.openDiff",
+          "when": "false"
+        },
+        {
+          "command": "tfvc.include",
+          "when": "false"
+        },
+        {
+          "command": "tfvc.exclude",
+          "when": "false"
+        },
+        {
+          "command": "tfvc.includeAll",
+          "when": "false"
+        },
+        {
+          "command": "tfvc.excludeAll",
+          "when": "false"
+        },
+        {
+          "command": "tfvc.getLatestFile",
+          "when": "false"
+        },
+        {
+          "command": "tfvc.resolveKeepYours",
+          "when": "false"
+        },
+        {
+          "command": "tfvc.resolveTakeTheirs",
+          "when": "false"
+        }
+      ],
+      "scm/title": [
+        {
+          "command": "tfvc.checkin",
+          "when": "scmProvider == tfvc",
+          "group": "navigation@1"
+        },
+        {
+          "command": "tfvc.getLatest",
+          "when": "scmProvider == tfvc",
+          "group": "navigation@2"
+        },
+        {
+          "command": "tfvc.refresh",
+          "when": "scmProvider == tfvc",
+          "group": "navigation@3"
+        },
+        {
+          "command": "tfvc.shelve",
+          "when": "scmProvider == tfvc",
+          "group": "1_tfvc@1"
+        },
+        {
+          "command": "tfvc.unshelve",
+          "when": "scmProvider == tfvc",
+          "group": "1_tfvc@2"
+        },
+        {
+          "command": "tfvc.workspaceInfo",
+          "when": "scmProvider == tfvc",
+          "group": "2_tfvc@1"
+        },
+        {
+          "command": "tfvc.showOutput",
+          "when": "scmProvider == tfvc",
+          "group": "2_tfvc@2"
+        }
+      ],
+      "scm/resourceGroup/context": [
+        {
+          "command": "tfvc.includeAll",
+          "when": "scmProvider == tfvc && scmResourceGroup == excluded",
+          "group": "inline"
+        },
+        {
+          "command": "tfvc.excludeAll",
+          "when": "scmProvider == tfvc && scmResourceGroup == included",
+          "group": "inline"
+        }
+      ],
+      "scm/resourceState/context": [
+        {
+          "command": "tfvc.openDiff",
+          "when": "scmProvider == tfvc && scmResourceGroup != excluded",
+          "group": "inline@1"
+        },
+        {
+          "command": "tfvc.undo",
+          "when": "scmProvider == tfvc && scmResourceGroup == included",
+          "group": "inline@2"
+        },
+        {
+          "command": "tfvc.include",
+          "when": "scmProvider == tfvc && scmResourceGroup == excluded",
+          "group": "inline@1"
+        },
+        {
+          "command": "tfvc.exclude",
+          "when": "scmProvider == tfvc && scmResourceGroup == included",
+          "group": "1_modification@1"
+        },
+        {
+          "command": "tfvc.add",
+          "when": "scmProvider == tfvc && scmResourceGroup == excluded",
+          "group": "1_modification@1"
+        },
+        {
+          "command": "tfvc.undo",
+          "when": "scmProvider == tfvc && scmResourceGroup == included",
+          "group": "1_modification@2"
+        },
+        {
+          "command": "tfvc.history",
+          "when": "scmProvider == tfvc",
+          "group": "2_info@1"
+        },
+        {
+          "command": "tfvc.openFile",
+          "when": "scmProvider == tfvc",
+          "group": "2_info@2"
+        },
+        {
+          "command": "tfvc.resolveKeepYours",
+          "when": "scmProvider == tfvc && scmResourceGroup == conflicts",
+          "group": "3_resolve@1"
+        },
+        {
+          "command": "tfvc.resolveTakeTheirs",
+          "when": "scmProvider == tfvc && scmResourceGroup == conflicts",
+          "group": "3_resolve@2"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "tfvc.checkout",
+          "when": "tfvc.active && !explorerResourceIsFolder",
+          "group": "tfvc@1"
+        },
+        {
+          "command": "tfvc.add",
+          "when": "tfvc.active",
+          "group": "tfvc@2"
+        },
+        {
+          "command": "tfvc.undo",
+          "when": "tfvc.active",
+          "group": "tfvc@3"
+        },
+        {
+          "command": "tfvc.getLatestFile",
+          "when": "tfvc.active",
+          "group": "tfvc@4"
+        },
+        {
+          "command": "tfvc.history",
+          "when": "tfvc.active",
+          "group": "tfvc@5"
+        },
+        {
+          "command": "tfvc.diff",
+          "when": "tfvc.active && !explorerResourceIsFolder",
+          "group": "tfvc@6"
+        },
+        {
+          "command": "tfvc.rename",
+          "when": "tfvc.active",
+          "group": "tfvc@7"
+        },
+        {
+          "command": "tfvc.delete",
+          "when": "tfvc.active",
+          "group": "tfvc@8"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "tfvc.checkout",
+          "when": "tfvc.active && resourceScheme == file",
+          "group": "tfvc@1"
+        },
+        {
+          "command": "tfvc.history",
+          "when": "tfvc.active && resourceScheme == file",
+          "group": "tfvc@2"
+        },
+        {
+          "command": "tfvc.diff",
+          "when": "tfvc.active && resourceScheme == file",
+          "group": "tfvc@3"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "tfvc.diff",
+          "when": "tfvc.active && resourceScheme == file",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "TFVC",
+      "properties": {
+        "tfvc.path": {
+          "type": "string",
+          "default": "",
+          "description": "Absolute path to tf.exe or the Team Explorer Everywhere `tf` script. Leave empty to auto-detect Visual Studio / PATH installs."
+        },
+        "tfvc.collection": {
+          "type": "string",
+          "default": "",
+          "description": "Optional Azure DevOps / TFS collection URL passed as /collection to tf commands."
+        },
+        "tfvc.login": {
+          "type": "string",
+          "default": "",
+          "description": "Optional username for /login. The password is stored in Secret Storage after TFVC: Sign In."
+        },
+        "tfvc.autoCheckout": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically check out a read-only file when you start editing it (server workspaces)."
+        },
+        "tfvc.restrictToWorkspaceFolder": {
+          "type": "boolean",
+          "default": true,
+          "description": "Limit status and get-latest to the opened VS Code / Cursor folder instead of the entire TFVC workspace."
+        },
+        "tfvc.refreshOnSave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Refresh pending changes after a file is saved."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile && node --test out/test/*.js",
+    "package": "npx @vscode/vsce package --no-dependencies --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.7.2"
+  }
+}
