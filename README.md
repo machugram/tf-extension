@@ -12,7 +12,7 @@ Cursor is a VS Code-compatible editor, so this is a normal VS Code extension: sa
 
 ## Install in Cursor
 
-1. Download the latest `.vsix` from [Releases](https://github.com/rexfordmachu/vscode-tfvc/releases), or build one locally (`npm run package`).
+1. Build a VSIX locally (`npm run package`).
 2. In Cursor: **Extensions** → `⋯` → **Install from VSIX…**
 3. Open a folder that is already mapped with `tf workfold`.
 4. Open the **Source Control** view. If TFVC does not appear, run **TFVC: Choose tf.exe Path**.
